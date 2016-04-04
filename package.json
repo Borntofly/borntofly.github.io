@@ -2,7 +2,7 @@
   "name": "weatherapp",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.js",
   "dependencies": {
     "node-static": "^0.7.7"
   },
