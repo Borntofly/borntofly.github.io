@@ -13,6 +13,12 @@ My app will have 2 Pages:
 6: device Controllers
 7: Define html Pages
 */
-
+var static = require('node-static');
+var file = new static.Server();
+require('http').createServer(function(request, response) {
+  request.addListener('end', function() {
+    file.serve(request, response);
+  }).resume();
+}).listen(process.env.PORT || 3000);
 //Module
 var weatherApp = angular.module('weatherApp', ['ngRoute', 'ngResource']);
