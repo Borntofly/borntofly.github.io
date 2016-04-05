@@ -22,20 +22,13 @@ weatherApp.controller('homeController', [
 weatherApp.controller('forecastController', [
     '$scope',
     'cityService',
-    '$resource',
     '$routeParams',
-    function($scope, cityService, $resource, $routeParams) {
+    'weatherService',
+    function($scope, cityService, $routeParams, weatherService) {
 
         $scope.city = cityService.city;
         $scope.days = $routeParams.days || '2';
-        $scope.weatherAPI = $resource(
-            'http://api.openweathermap.org/data/2.5/forecast/daily'
-        );
-        $scope.weatherResult = $scope.weatherAPI.get({
-            q: $scope.city,
-            cnt: $scope.days,
-            APPID: "9462c403a0b72dc5148cfe53d8714c9a"
-        })
+        $scope.weatherResult = weatherService.getWeather($scope.city, $scope.days);
         $scope.weatherInCelcius = function(kelvinValue) {
             return Math.round(kelvinValue - 273.15);
         }
